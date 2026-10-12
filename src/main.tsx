@@ -14,7 +14,8 @@ function App() {
             <p>Edits render live in the preview →</p>
           </header>
 
-          <fieldset>
+          <fieldset className="grid grid-cols-2 gap-5 lg:grid-cols-1">
+            <legend className="sr-only">User info</legend>
             <label htmlFor="eventName">
               Event Name
               <input type="text" name="eventName" id="eventName" />
@@ -92,7 +93,7 @@ function App() {
           </fieldset>
         </form>
       </section>
-      <section className="flex h-full min-h-0 bg-slate-300"></section>
+      <section className="flex h-full min-h-0 items-center justify-center bg-slate-300 p-6"></section>
     </main>
   );
 }

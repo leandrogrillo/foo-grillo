@@ -4,3 +4,4 @@
 - Now that I have the constants, I will build the basic markup base on those values
 - I forgot to add the themes const
 - It's missing the three other fields: eventName, holderName and date
+- I will create the basic idea of the responsive thinking in mobile first. eventName and holderName side by side on mobile, other fields are stacked and in desktop it follows the spec.
