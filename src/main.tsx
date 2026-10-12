@@ -15,6 +15,23 @@ function App() {
           </header>
 
           <fieldset>
+            <label htmlFor="eventName">
+              Event Name
+              <input type="text" name="eventName" id="eventName" />
+            </label>
+
+            <label htmlFor="holderName">
+              Holder Name
+              <input type="text" name="holderName" id="date" />
+            </label>
+
+            <label htmlFor="date">
+              Date
+              <input type="date" name="date" id="date" />
+            </label>
+          </fieldset>
+
+          <fieldset>
             <legend>Tier</legend>
             {Object.entries(TIERS).map(([label, tier]) => (
               <label htmlFor={`tier-${tier}`} key={`tier-${tier}`}>
