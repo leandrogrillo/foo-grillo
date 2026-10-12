@@ -20,3 +20,11 @@
 - adding the fonts to finish the typograph in the ticket
 - not all the fonts are correctly, it still missing the icons
 - time is over, that all that I could do.
+
+## what I could have done better
+
+I got far based on the first try, changing the approach that was: instead of writing all the markup (which took too much time), I created the constants and render the components based on that, it saved me a good amount of time. It is still uncomplete, even using tailwind.
+
+A lot of mixing of css + tailwind, I could thought in a better approach instead of mixing to much, the only part that really makes sense is the dynamic theme changing, so defining the inline variable helps to not write a lot of css.
+
+the submit is still mising, same from the past try.
