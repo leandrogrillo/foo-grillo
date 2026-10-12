@@ -91,6 +91,12 @@ function App() {
               </label>
             ))}
           </fieldset>
+          <button
+            type="submit"
+            className="w-full bg-blue-950 text-white text-center py-3.5 rounded-xl"
+          >
+            Save Ticket
+          </button>
         </form>
       </section>
       <section className="flex h-full min-h-0 items-center justify-center bg-slate-300 p-6"></section>
