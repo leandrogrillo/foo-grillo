@@ -24,3 +24,12 @@ export const MARK_SYMBOLS = {
 } as const;
 
 export type Mark = (typeof MARK_SYMBOLS)[keyof typeof MARK_SYMBOLS];
+
+export const THEMES = {
+  Midnigh: "midnight",
+  Sunrise: "sunrise",
+  Forest: "forest",
+  Mono: "mono",
+} as const;
+
+export type Theme = (typeof THEMES)[keyof typeof THEMES];
