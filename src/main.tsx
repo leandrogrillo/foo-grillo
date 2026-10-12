@@ -1,14 +1,41 @@
-import { StrictMode } from "react";
+import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 
 import "./index.css";
-import { ACCENT_COLORS, MARK_SYMBOLS, THEMES, TIERS } from "./types";
+import {
+  ACCENT_COLORS,
+  MARK_SYMBOLS,
+  THEMES,
+  TicketFormState,
+  TIERS,
+} from "./types";
+
+const defaultTicketState: TicketFormState = {
+  eventName: "",
+  holderName: "",
+  date: "",
+  tier: TIERS.VIP,
+  accentColor: ACCENT_COLORS.INDIGO,
+  mark: MARK_SYMBOLS.MARK,
+  theme: THEMES.Midnight,
+};
 
 function App() {
+  const [ticket, setTicket] = useState(defaultTicketState);
+
+  const formChangeHandler: React.ChangeEventHandler<HTMLFormElement> = (e) => {
+    const target = e.target;
+
+    setTicket((prev) => ({ ...prev, [target.name]: target.value }));
+  };
+
   return (
     <main className="grid min-h-dvh lg:grid-cols-[1fr_1fr]">
       <section className="flex flex-col">
-        <form className="flex flex-col gap-5 p-6 lg:min-h-dvh">
+        <form
+          className="flex flex-col gap-5 p-6 lg:min-h-dvh"
+          onChange={formChangeHandler}
+        >
           <header className="flex flex-col gap-1">
             <h1>New ticket</h1>
             <p>Edits render live in the preview →</p>
@@ -18,17 +45,32 @@ function App() {
             <legend className="sr-only">User info</legend>
             <label htmlFor="eventName">
               Event Name
-              <input type="text" name="eventName" id="eventName" />
+              <input
+                type="text"
+                name="eventName"
+                id="eventName"
+                defaultValue={defaultTicketState.eventName}
+              />
             </label>
 
             <label htmlFor="holderName">
               Holder Name
-              <input type="text" name="holderName" id="date" />
+              <input
+                type="text"
+                name="holderName"
+                id="date"
+                defaultValue={defaultTicketState.holderName}
+              />
             </label>
 
             <label htmlFor="date">
               Date
-              <input type="date" name="date" id="date" />
+              <input
+                type="date"
+                name="date"
+                id="date"
+                defaultValue={defaultTicketState.date}
+              />
             </label>
           </fieldset>
 
@@ -42,6 +84,7 @@ function App() {
                   name="tier"
                   id={`tier-${tier}`}
                   value={tier}
+                  defaultChecked={defaultTicketState.tier === tier}
                 />
               </label>
             ))}
@@ -50,15 +93,16 @@ function App() {
             <legend>Accent Color</legend>
             {Object.entries(ACCENT_COLORS).map(([label, color]) => (
               <label
-                htmlFor={`accent-color-${color}`}
-                key={`accent-color-${color}`}
+                htmlFor={`accentColor-${color}`}
+                key={`accentColor-${color}`}
               >
                 {label}
                 <input
                   type="radio"
-                  name="accent-color"
-                  id={`accent-color-${color}`}
+                  name="accentColor"
+                  id={`accentColor-${color}`}
                   value={color}
+                  defaultChecked={defaultTicketState.accentColor === color}
                 />
               </label>
             ))}
@@ -73,6 +117,7 @@ function App() {
                   name="mark"
                   id={`mark-${symbol}`}
                   value={symbol}
+                  defaultChecked={defaultTicketState.mark === symbol}
                 />
               </label>
             ))}
@@ -87,6 +132,7 @@ function App() {
                   name="theme"
                   id={`theme-${theme}`}
                   value={theme}
+                  defaultChecked={defaultTicketState.theme === theme}
                 />
               </label>
             ))}
@@ -99,7 +145,14 @@ function App() {
           </button>
         </form>
       </section>
-      <section className="flex h-full min-h-0 items-center justify-center bg-slate-300 p-6"></section>
+      <section className="flex flex-col h-full min-h-0 items-center justify-center bg-slate-300 p-6">
+        <p>event name: {ticket.eventName}</p>
+        <p>holder name: {ticket.holderName}</p>
+        <p>date: {ticket.date}</p>
+        <p>accent color: {ticket.accentColor}</p>
+        <p>mark: {ticket.mark}</p>
+        <p>theme: {ticket.theme}</p>
+      </section>
     </main>
   );
 }
