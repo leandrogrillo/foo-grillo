@@ -11,3 +11,12 @@
 - also added the defaultChecked for the radios and defaultValue to the static inputs
 - accent color was using the wrong name
 - all the fields are working and rendering correct.
+- I have almost the main functionality working, now I will do the basic structure of the ticket component.
+- Added a small change in the main wrapper, so the mobile form wrapper can have the heigh of the form and a minmax width on desktop
+- created tokens for the theme switching with surface, ink and accent
+- created integration using css varibles to change the colors correct
+- one thing that I'm not sure is if when changing theme, the accent options in the form, should also change together, should it? not sure.
+- found another typo in the types for the accent colors object: emeral instead of emerald.
+- adding the fonts to finish the typograph in the ticket
+- not all the fonts are correctly, it still missing the icons
+- time is over, that all that I could do.

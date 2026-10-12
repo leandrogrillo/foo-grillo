@@ -9,7 +9,7 @@ export type Tier = (typeof TIERS)[keyof typeof TIERS];
 export const ACCENT_COLORS = {
   INDIGO: "indigo",
   ORANGE: "orange",
-  EMERAL: "emerald",
+  EMERALD: "emerald",
   SKY: "sky",
   BLACK: "black",
 } as const;

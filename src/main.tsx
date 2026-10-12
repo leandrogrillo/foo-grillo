@@ -22,6 +22,11 @@ const defaultTicketState: TicketFormState = {
 
 function App() {
   const [ticket, setTicket] = useState(defaultTicketState);
+  const [ticketId] = useState(() =>
+    Math.floor(Math.random() * 10_000)
+      .toString()
+      .padStart(4, "0"),
+  );
 
   const formChangeHandler: React.ChangeEventHandler<HTMLFormElement> = (e) => {
     const target = e.target;
@@ -30,7 +35,7 @@ function App() {
   };
 
   return (
-    <main className="grid min-h-dvh lg:grid-cols-[1fr_1fr]">
+    <main className="grid grid-cols-1 grid-rows-[auto_1fr] lg:grid-cols-[minmax(20rem,28rem)_1fr] min-h-dvh lg:grid-rows-none">
       <section className="flex flex-col">
         <form
           className="flex flex-col gap-5 p-6 lg:min-h-dvh"
@@ -146,12 +151,39 @@ function App() {
         </form>
       </section>
       <section className="flex flex-col h-full min-h-0 items-center justify-center bg-slate-300 p-6">
-        <p>event name: {ticket.eventName}</p>
-        <p>holder name: {ticket.holderName}</p>
-        <p>date: {ticket.date}</p>
-        <p>accent color: {ticket.accentColor}</p>
-        <p>mark: {ticket.mark}</p>
-        <p>theme: {ticket.theme}</p>
+        <div
+          className="ticket w-150"
+          style={
+            {
+              "--ticket-surface": `var(--color-theme-${ticket.theme}-surface)`,
+              "--ticket-ink": `var(--color-theme-${ticket.theme}-ink)`,
+              "--ticket-accent": `var(--color-accent-${ticket.accentColor})`,
+            } as React.CSSProperties
+          }
+        >
+          <div className="ticket__body">
+            <div className="flex flex-row justify-between items-center">
+              <p className="font-mono text-label">Admit one</p>
+              <p className="tier-tag">{ticket.tier}</p>
+            </div>
+
+            <div className="self-center">
+              <p className="font-display text-event-name">{ticket.eventName}</p>
+              <p className="font-mono text-label">{ticket.holderName}</p>
+            </div>
+            <p className="flex flex-col">
+              <span className="font-mono text-label">Date</span>
+              <span className="font-display text-ticket-data">
+                {ticket.date}
+              </span>
+            </p>
+          </div>
+          <div className="ticket__stub">
+            <p className="font-mono text-label">TS-{ticketId}</p>
+            {ticket.mark}
+            <p className="font-display text-label">{ticket.tier}</p>
+          </div>
+        </div>
       </section>
     </main>
   );

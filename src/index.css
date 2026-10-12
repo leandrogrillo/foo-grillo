@@ -1,4 +1,39 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+@theme static {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", serif;
+
+  --text-label: 11px;
+  --text-event-name: 38px;
+  --text-ticket-data: 13px;
+
+  --color-theme-midnight-surface: var(--color-slate-900);
+  --color-theme-midnight-ink: var(--color-slate-200);
+  --color-theme-midnight-accent: var(--color-indigo-500);
+
+  --color-theme-sunrise-surface: var(--color-orange-50);
+  --color-theme-sunrise-ink: var(--color-orange-950);
+  --color-theme-sunrise-accent: var(--color-orange-500);
+
+  --color-theme-forest-surface: #052e27;
+  --color-theme-forest-ink: var(--color-emerald-100);
+  --color-theme-forest-accent: var(--color-emerald-500);
+
+  --color-theme-mono-surface: var(--color-neutral-50);
+  --color-theme-mono-ink: #111111;
+  --color-theme-mono-accent: #111111;
+
+  --color-accent-indigo: var(--color-indigo-500);
+  --color-accent-orange: var(--color-orange-500);
+  --color-accent-emerald: var(--color-emerald-500);
+  --color-accent-sky: var(--color-sky-500);
+  --color-accent-black: #111111;
+
+  --color-theme-surface: var(--color-theme-midnight-surface);
+  --color-theme-ink: var(--color-theme-midnight-ink);
+  --color-theme-accent: var(--color-theme-midnight-accent);
+}
 
 :root {
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
@@ -11,4 +46,43 @@
 body {
   margin: 0;
   min-width: 320px;
+}
+
+.ticket {
+  @apply grid h-56 w-150 grid-rows-1;
+  grid-template-columns: minmax(0, 1fr) calc(var(--spacing) * 34);
+
+  & .tier-tag {
+    @apply border rounded-full py-1 px-2.5 font-mono text-label;
+    border-color: var(--ticket-accent);
+  }
+
+  & .ticket__body,
+  & .ticket__stub {
+    @apply min-h-0 rounded-2xl px-8 py-7;
+    background-color: var(--ticket-surface);
+    color: var(--ticket-ink);
+  }
+
+  & .ticket__body {
+    @apply grid min-w-0 grid-rows-[auto_1fr_auto];
+    corner-top-right-shape: scoop;
+    corner-bottom-right-shape: scoop;
+  }
+
+  & .ticket__stub {
+    @apply relative flex flex-col items-center justify-between border-l-0;
+    corner-top-left-shape: scoop;
+    corner-bottom-left-shape: scoop;
+
+    &::before {
+      @apply absolute inset-y-4 left-0 w-0.5;
+      content: "";
+      background: repeating-linear-gradient(
+        to bottom,
+        var(--ticket-accent) 0 calc(var(--spacing) * 2),
+        transparent calc(var(--spacing) * 2) 14px
+      );
+    }
+  }
 }
